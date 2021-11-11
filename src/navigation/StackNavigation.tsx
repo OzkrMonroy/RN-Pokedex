@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from '../screens/HomeScreen';
-import { PokemonScreen } from '../screens/PokemonScreen';
+import { PokemonScreen } from '../screens/pokemonScreen/PokemonScreen';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { createStackNavigator } from '@react-navigation/stack';
 
