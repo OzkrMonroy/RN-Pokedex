@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+//TODO: Fixed headerContainer
 export const pokemonScreenStyles = StyleSheet.create({
   headerContainer: {
     height: 370,
@@ -29,5 +30,10 @@ export const pokemonScreenStyles = StyleSheet.create({
     height: 250,
     position: 'absolute',
     bottom: -15,
+  },
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

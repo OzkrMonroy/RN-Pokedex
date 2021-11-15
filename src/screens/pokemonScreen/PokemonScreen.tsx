@@ -1,11 +1,13 @@
 import React from 'react'
 import { StackScreenProps } from '@react-navigation/stack'
-import { Button, Image, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Button, Image, Text, TouchableOpacity, View } from 'react-native'
 import { RootStackParams } from '../../navigation/StackNavigation'
 import { pokemonScreenStyles } from './pokemonScreenStyles'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { FadeInImage } from '../../components/FadeInImage'
+import { usePokemon } from '../../hooks/usePokemon'
+import { PokemonDetails } from '../../components/pokemonDetails/PokemonDetails'
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'>{}
 
@@ -14,9 +16,10 @@ export const PokemonScreen = ({ navigation, route } : Props) => {
   const { pokemon, color } = route.params
 
   const { name, id, picture } = pokemon
+  const { isLoading, pokemon: pokemonFull } = usePokemon(id)
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={{
         ...pokemonScreenStyles.headerContainer,
         backgroundColor: color,
@@ -45,12 +48,24 @@ export const PokemonScreen = ({ navigation, route } : Props) => {
         </Text>
         <Image
           source={require('../../assets/pokebola-blanca.png')}
+          style={{ ...pokemonScreenStyles.pokeball }}
         />
         <FadeInImage
           uri={picture}
           style={{ ...pokemonScreenStyles.pokemonImage }}
         />
       </View>
+      { isLoading ? (
+        <View style={{ ...pokemonScreenStyles.loadingIndicator }}>
+          <ActivityIndicator
+            color={color}
+            size={50}
+          />
+        </View>
+
+      ) : (
+        <PokemonDetails pokemon={pokemonFull}/>
+      ) }
     </View>
   )
 }

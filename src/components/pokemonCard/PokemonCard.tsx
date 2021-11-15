@@ -29,7 +29,7 @@ export const PokemonCard = ({ pokemon }: Props) => {
 
       switch (result.platform) {
         case 'android':
-          console.log(result.dominant)
+          // console.log(result.dominant)
           newBgColor = (result.dominant || 'gray')
           break
         case 'ios':
