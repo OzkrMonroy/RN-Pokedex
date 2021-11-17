@@ -11,7 +11,8 @@ export const pokemonDetailsStyles = StyleSheet.create({
     color: 'black'
   },
   regularText: {
-    fontSize: 19
+    fontSize: 19,
+    color: 'gray',
   },
   basicSprite: {
     width: 100,

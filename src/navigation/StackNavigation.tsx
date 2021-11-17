@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from '../screens/HomeScreen';
 import { PokemonScreen } from '../screens/pokemonScreen/PokemonScreen';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
@@ -14,7 +13,6 @@ const Stack = createStackNavigator<RootStackParams>();
 
 export const StackNavigation = () => {
   return (
-    <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerShown: false,
         cardStyle: {
@@ -24,6 +22,5 @@ export const StackNavigation = () => {
         <Stack.Screen name='HomeScreen' component={HomeScreen}/>
         <Stack.Screen name='PokemonScreen' component={PokemonScreen}/>
       </Stack.Navigator>
-    </NavigationContainer>
   )
 }

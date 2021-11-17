@@ -1,12 +1,15 @@
 // import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react'
 import { View } from 'react-native'
-import { StackNavigation } from './src/navigation/StackNavigation';
+import { BottomTabs } from './src/navigation/BottomTabs';
 
 const App = () => {
   return (
     <View style={{ flex: 1, }}>
-      <StackNavigation/>
+      <NavigationContainer>
+        <BottomTabs/>
+      </NavigationContainer>
     </View>
   )
 }

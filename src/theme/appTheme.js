@@ -15,5 +15,6 @@ export const globalTheme = StyleSheet.create({
   title: {
     fontSize: 35,
     fontWeight: 'bold',
-  }
+    color: 'black'
+  },
 })
