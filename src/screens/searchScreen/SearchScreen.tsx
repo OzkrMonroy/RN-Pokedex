@@ -1,47 +1,62 @@
-import React from 'react'
-import { ActivityIndicator, FlatList, Platform, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Dimensions, FlatList, Platform, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Loading } from '../../components/loading/Loading'
 import { PokemonCard } from '../../components/pokemonCard/PokemonCard'
 import { SearchInput } from '../../components/searchInput/SearchInput'
 import { usePokemonSearch } from '../../hooks/usePokemonSearch'
 import { globalTheme } from '../../theme/appTheme'
 import { searchScreenStyles } from './searchScreenStyles'
+import { SimplePokemon } from '../../interfaces/pokemonInterfaces';
+
+const screenWidth = Dimensions.get('window').width
 
 export const SearchScreen = () => {
   const { top } = useSafeAreaInsets()
   const { isFetching, simplePokemonList } = usePokemonSearch()
+  const [term, setTerm] = useState('')
+  const [pokemonFiltered, setPokemonFiltered] = useState<SimplePokemon[]>([])
 
-  if(isFetching){
-    return (
-      <View style={searchScreenStyles.loadingContainer}>
-        <ActivityIndicator color='gray' size={50}/>
-        <Text style={{ color: 'gray', top: 10 }}>Loading...</Text>
-      </View>
-    )
+  useEffect(() => {
+    if (term.length === 0) return setPokemonFiltered([])
+
+    setPokemonFiltered(simplePokemonList.filter(poke => poke.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())))
+  }, [term])
+
+  if (isFetching) {
+    return <Loading style={searchScreenStyles} />
   }
 
   return (
     <View
       style={{
         flex: 1,
-        marginTop: Platform.OS === 'android' ? top + 20 : top,
         marginHorizontal: 20
       }}
     >
-      <SearchInput/>
+      <SearchInput
+        onDebaunce={(value) => setTerm(value)}
+        style={{
+          position: 'absolute',
+          zIndex: 999,
+          width: screenWidth - 40,
+          marginTop: (Platform.OS === 'ios') ? top : top + 20
+        }}
+
+      />
       <FlatList
-          data={simplePokemonList}
-          keyExtractor={(pokemon) => pokemon.id}
-          ListHeaderComponent={(
-            <Text 
-            style={{ ...globalTheme.title, ...globalTheme.globalMargin, top: 20, marginBottom: 20, paddingBottom: 10}}>
-              Pokedex
-            </Text>
-          )}
-          renderItem={({ item }) => (<PokemonCard pokemon={item}/> )}
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-        />
+        data={pokemonFiltered}
+        keyExtractor={(pokemon) => pokemon.id}
+        ListHeaderComponent={(
+          <Text
+            style={{ ...globalTheme.title, ...globalTheme.globalMargin, marginTop: (Platform.OS === 'ios') ? top + 60 : top + 80, marginBottom: 20, paddingBottom: 10 }}>
+            {term}
+          </Text>
+        )}
+        renderItem={({ item }) => (<PokemonCard pokemon={item} />)}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   )
 }

@@ -22,7 +22,7 @@ export const HomeScreen = ({ navigation }: Props) => {
           keyExtractor={(pokemon) => pokemon.id}
           ListHeaderComponent={(
             <Text 
-            style={{ ...globalTheme.title, ...globalTheme.globalMargin, top: top + 20, marginBottom: top+20, paddingBottom: 10}}>
+            style={{ ...globalTheme.title, ...globalTheme.globalMargin, marginTop: top + 20, marginBottom: top+20, paddingBottom: 10}}>
               Pokedex
             </Text>
           )}
