@@ -1,7 +1,7 @@
 import React from 'react'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ActivityIndicator, Button, Image, Text, TouchableOpacity, View } from 'react-native'
-import { RootStackParams } from '../../navigation/StackNavigation'
+import { RootStackParams } from '../../navigation/Tab1Navigation'
 import { pokemonScreenStyles } from './pokemonScreenStyles'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'

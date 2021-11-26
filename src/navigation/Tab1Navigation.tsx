@@ -11,7 +11,7 @@ export type RootStackParams = {
 
 const Stack = createStackNavigator<RootStackParams>();
 
-export const StackNavigation = () => {
+export const Tab1Navigation = () => {
   return (
       <Stack.Navigator screenOptions={{
         headerShown: false,
